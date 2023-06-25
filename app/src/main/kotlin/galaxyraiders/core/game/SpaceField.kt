@@ -4,6 +4,7 @@ import galaxyraiders.Config
 import galaxyraiders.core.physics.Point2D
 import galaxyraiders.core.physics.Vector2D
 import galaxyraiders.ports.RandomGenerator
+import java.time.LocalDateTime
 
 object SpaceFieldConfig {
   private val config = Config(prefix = "GR__CORE__GAME__SPACE_FIELD__")
@@ -29,6 +30,11 @@ object SpaceFieldConfig {
 data class SpaceField(val width: Int, val height: Int, val generator: RandomGenerator) {
   val boundaryX = 0.0..width.toDouble()
   val boundaryY = 0.0..height.toDouble()
+
+  var gameData = GameData(
+    dateTime = LocalDateTime.now().toString(),
+    initialScore = 0.0
+  )
 
   val ship = initializeShip()
 
@@ -64,9 +70,12 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
     this.asteroids += this.createAsteroidWithRandomProperties()
   }
 
-  /* fun generateExplosion() {
-    this.explosions += this.createAsteroidWithRandomProperties()
-  }*/
+  fun generateExplosion(asteroid: Asteroid) {
+    asteroid.explode()
+    val explosion = Explosion(asteroid)
+    this.explosions += explosion
+    this.gameData.updateScore(explosion.score) 
+  }
 
   fun trimMissiles() {
     this.missiles = this.missiles.filter {
@@ -77,6 +86,9 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
   fun trimAsteroids() {
     this.asteroids = this.asteroids.filter {
       it.inBoundaries(this.boundaryX, this.boundaryY)
+    }
+    this.asteroids = this.asteroids.filterNot {
+      it.explosion_happened
     }
   }
 

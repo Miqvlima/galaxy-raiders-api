@@ -89,9 +89,14 @@ class GameEngine(
         (first, second) ->
       if (first.impacts(second)) {
 
-        if((first is Missile and second is Asteroid) || (first is Asteroid and second is Missile)){
-          // cria explosao, deleta asteroide
+        if ((first.type == "Asteroid")  && (second.type == "Missile")){
+          this.field.generateExplosion(first as Asteroid)
         }
+        else if ((second.type == "Asteroid")  && (first.type == "Missile")){
+          this.field.generateExplosion(second as Asteroid)
+        }
+
+        
         first.collideWith(second, GameEngineConfig.coefficientRestitution)
       }
     }

@@ -7,6 +7,14 @@ class Asteroid(
   initialPosition: Point2D,
   initialVelocity: Vector2D,
   radius: Double,
-  mass: Double
-) :
-  SpaceObject("Asteroid", '.', initialPosition, initialVelocity, radius, mass)
+  mass: Double,
+  is_triggered: Boolean = false
+) : SpaceObject("Asteroid", '.', initialPosition, initialVelocity, radius, mass) {
+    
+    var explosion_happened: Boolean = is_triggered    
+
+    fun explode(){
+      this.explosion_happened = true
+    }
+
+  }
