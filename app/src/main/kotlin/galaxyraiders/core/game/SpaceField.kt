@@ -74,7 +74,9 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
     asteroid.explode()
     val explosion = Explosion(asteroid)
     this.explosions += explosion
-    this.gameData.updateScore(explosion.score) 
+    this.gameData.updateScore(explosion.score)
+    this.gameData.updateNumberAsteroidsDestroyed()
+    this.gameData.updateJsonWithScore() 
   }
 
   fun trimMissiles() {

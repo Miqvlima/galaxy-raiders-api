@@ -34,7 +34,12 @@ class GameEngine(
   )
 
   var playing = true
-
+  
+  init {
+    this.field.gameData.addGameEntryToJson()
+    this.field.gameData.updateLeaderboard()
+  }
+  
   fun execute() {
     while (true) {
       val duration = measureTimeMillis { this.tick() }
