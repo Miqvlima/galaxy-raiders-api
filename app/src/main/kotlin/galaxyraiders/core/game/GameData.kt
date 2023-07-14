@@ -56,7 +56,12 @@ open class GameData(
         var topThreeGameEntries: MutableList<GameData> = arrayListOf()
         
         for (i in 1..3){
-            topThreeGameEntries.add(gameEntriesSorted[i])
+            try {
+                topThreeGameEntries.add(gameEntriesSorted[i])
+            }
+            catch (e: IndexOutOfBoundsException){
+                break
+            }
         }
 
         val topThreeGameEntriesToJson = mapper.writeValueAsString(topThreeGameEntries)

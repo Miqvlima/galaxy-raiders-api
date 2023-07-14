@@ -1,0 +1,20 @@
+[
+    {
+        "dateTime":"2023-07-14T14:42:46.769672863",
+        "initialScore":0,
+        "score":351,
+        "numberAsteroidsDestroyed":17
+    },
+    {
+        "dateTime":"2023-07-14T14:42:49.769672863",
+        "initialScore":0,
+        "score":287,
+        "numberAsteroidsDestroyed":15
+    },
+    {
+        "dateTime":"2023-07-14T14:58:46.769672863",
+        "initialScore":0,
+        "score":254,
+        "numberAsteroidsDestroyed":13
+    }
+]
